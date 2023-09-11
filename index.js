@@ -10,11 +10,11 @@ app.use(express.static(`public`));
 
 app.get(`/`, async (req, res) => {
     try {
-        const response = await axios.get(`https://api.blockchain.com/v3/exchange/tickers/ETH-EUR`);
-        console.log(response.data); // Logging response data
+        const response = await axios.get(`https://api.blockchain.com/v3/exchange/tickers`);
+        console.log(response.data.length); 
 
         res.render(`index.ejs`, {
-            price: response.data.price_24h
+            data: response.data
         });
 
     } catch (error) {
