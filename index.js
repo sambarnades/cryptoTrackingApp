@@ -11,10 +11,19 @@ app.use(express.static(`public`));
 app.get(`/`, async (req, res) => {
     try {
         const response = await axios.get(`https://api.blockchain.com/v3/exchange/tickers`);
-        console.log(response.data.length); 
+        
+        amountOfCryptocurrencies = response.data.length
+        amountOfRows = Math.floor(amountOfCryptocurrencies / 4) + 1
+        
+        console.log(`Amount of cryptos: ${amountOfCryptocurrencies}`);
+        console.log(`Amount of groups of 4 cryptos: ${amountOfRows}`);
+        // console.log(`Amount of rows: ${amountOfCryptocurrencies / 4}`);  
+  
 
         res.render(`index.ejs`, {
-            data: response.data
+            data: response.data,
+            amountOfCryptocurrencies: amountOfCryptocurrencies,
+            amountOfRows: amountOfRows
         });
 
     } catch (error) {
