@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <h1>My crypto tracker App!</h1>
+                <h1>Crypto Tracker</h1>
             </div>
 
             <% if(locals.data){ // Check if there are data%>
@@ -29,13 +29,15 @@
 
                 <% for(let i = 0; i < 12 / cols && cryptocurrenciesCounter < locals.amountOfCryptocurrencies ; i++){ // Subloop to show all the cryptos, based on the 12-cols Bootstrap pattern. We exactly restrict the counter to stop on the last crypto, if we don't, we'll have an error.  %>
 
-                <div class="col-sm-<%= cols %>">
+                <div class="col-md-<%= cols %>">
                     <div class="card">
-                        <img class="eth-icon"
-                            src="svg/<%= locals.data[cryptocurrenciesCounter].symbol %>.svg"
-                            class="card-img-top" alt="<%= locals.data[cryptocurrenciesCounter].symbol %>">
+                        <img class="crypto-icon" src="svg/<%= locals.cryptoNames[cryptocurrenciesCounter] %>.svg"
+                            class="card-img-top" alt="<%= locals.cryptoNames[cryptocurrenciesCounter] %>" width="90">
                         <div class="card-body">
-                            <p class="card-text"><%= locals.data[cryptocurrenciesCounter].price_24h %>€</p>
+                            
+                            <p class="card-text"><span class="badge text-bg-primary"><%= locals.data[cryptocurrenciesCounter].price_24h %>€</span></p>
+                            <p class="card-text"><span class="badge text-bg-success"><%= locals.data[cryptocurrenciesCounter].volume_24h %>€</span></p>
+                            <p class="card-text"><span class="badge text-bg-secondary"><%= locals.data[cryptocurrenciesCounter].last_trade_price %>€</span></p>
                             <%# We search the price, according to data passed by the server %>
                         </div>
                     </div>
