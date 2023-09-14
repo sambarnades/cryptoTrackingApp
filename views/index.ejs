@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col">
                 <h1>Crypto Tracker</h1>
@@ -34,10 +34,11 @@
                         <img class="crypto-icon" src="svg/<%= locals.cryptoNames[cryptocurrenciesCounter] %>.svg"
                             class="card-img-top" alt="<%= locals.cryptoNames[cryptocurrenciesCounter] %>" width="90">
                         <div class="card-body">
-                            
-                            <p class="card-text"><span class="badge text-bg-primary"><%= locals.data[cryptocurrenciesCounter].price_24h %>€</span></p>
-                            <p class="card-text"><span class="badge text-bg-success"><%= locals.data[cryptocurrenciesCounter].volume_24h %>€</span></p>
-                            <p class="card-text"><span class="badge text-bg-secondary"><%= locals.data[cryptocurrenciesCounter].last_trade_price %>€</span></p>
+
+                            <p class="card-text"><span class="badge text-bg-dark"><%= locals.data[cryptocurrenciesCounter].symbol.toUpperCase() %></span></p>
+                            <p class="card-text"><span class="badge text-bg-primary"><%= locals.data[cryptocurrenciesCounter].price_24h + " " + locals.fiatCurrency[cryptocurrenciesCounter] %></span></p>
+                            <p class="card-text"><span class="badge text-bg-success"><%= locals.data[cryptocurrenciesCounter].volume_24h + " " + locals.fiatCurrency[cryptocurrenciesCounter] %></span></p>
+                            <p class="card-text"><span class="badge text-bg-secondary"><%= locals.data[cryptocurrenciesCounter].last_trade_price + " " + locals.fiatCurrency[cryptocurrenciesCounter] %></span></p>
                             <%# We search the price, according to data passed by the server %>
                         </div>
                     </div>
