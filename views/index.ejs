@@ -11,23 +11,48 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col">
-                <h1>My crypto tracker App!</h1>
+                <h1>Crypto Tracker</h1>
             </div>
+
+            <% if(locals.data){ // Check if there are data%>
+
+            <% let cols = 3; // Define number of cols by Bootstrap, have to render it as dynamic.
+                  let cryptocurrenciesCounter = 0; // Initalize an external counter to escape the loop & to put all in the right row.
+               %>
+
+            <% for(let i = 0; i < locals.amountOfRows ; i++) { // Loop to define how many rows we need, based on server-side information. Have to add a POST functionnality to modify the cols %>
+
             <div class="row">
-                <div class="col-2">
+
+                <% for(let i = 0; i < 12 / cols && cryptocurrenciesCounter < locals.amountOfCryptocurrencies ; i++){ // Subloop to show all the cryptos, based on the 12-cols Bootstrap pattern. We exactly restrict the counter to stop on the last crypto, if we don't, we'll have an error.  %>
+
+                <div class="col-md-<%= cols %>">
                     <div class="card">
-                        <img class="eth-icon"
-                            src="https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/512/Ethereum-ETH-icon.png"
-                            class="card-img-top" alt="ETH">
+                        <img class="crypto-icon" src="svg/<%= locals.cryptoNames[cryptocurrenciesCounter] %>.svg"
+                            class="card-img-top" alt="<%= locals.cryptoNames[cryptocurrenciesCounter] %>" width="90">
                         <div class="card-body">
-                            <p class="card-text"><%= locals.price %>€</p>
+
+                            <p class="card-text"><span class="badge text-bg-dark"><%= locals.data[cryptocurrenciesCounter].symbol.toUpperCase() %></span></p>
+                            <p class="card-text"><span class="badge text-bg-primary"><%= locals.data[cryptocurrenciesCounter].price_24h + " " + locals.fiatCurrency[cryptocurrenciesCounter] %></span></p>
+                            <p class="card-text"><span class="badge text-bg-success"><%= locals.data[cryptocurrenciesCounter].volume_24h + " " + locals.fiatCurrency[cryptocurrenciesCounter] %></span></p>
+                            <p class="card-text"><span class="badge text-bg-secondary"><%= locals.data[cryptocurrenciesCounter].last_trade_price + " " + locals.fiatCurrency[cryptocurrenciesCounter] %></span></p>
+                            <%# We search the price, according to data passed by the server %>
                         </div>
                     </div>
                 </div>
+                <% cryptocurrenciesCounter++ // We increase the exernal counter to show each of cryptos %>
+                <% } %>
             </div>
+
+            <% } %>
+            <% }; %>
+
+
+
+
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

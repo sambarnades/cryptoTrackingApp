@@ -1,8 +1,31 @@
-.card{
-    text-align: center;
+@font-face {
+    font-family: "Break";
+    src: url(../fonts/Break.ttf);
 }
 
-.eth-icon{
-width: 5rem;
+body{
+    background-color: #FFF5E0;
+}
+
+h1{
+    color: #141E46;
+    font-family: "Break", "sans-serif";
+    text-align: center;
+    font-size: 5rem;
+    margin: 3rem auto;
+    color: #BB2525;
+}
+
+.card{
+    margin: 1rem 1rem;
+    text-align: center;
+    border: 2px solid #BB2525;
+}
+
+.badge{
+    font-size: 0.9rem;
+}
+
+.crypto-icon{
 margin: 1rem auto;
 }
