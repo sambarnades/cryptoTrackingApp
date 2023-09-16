@@ -4,7 +4,7 @@ const axios = require(`axios`).default;
 const jquery = require(`jquery`);
 
 const app = express();
-const port = 4001;
+const port = 3000;
 
 app.use(express.static(`public`));
 
@@ -23,22 +23,35 @@ app.get(`/`, async (req, res) => {
             let cryptoConversion = cryptoCurrency.symbol;                   // Transform the conversion title to the crypto name only. Useful to link to the svg file for the icon.
             let hyphenIndex = cryptoConversion.indexOf('-');
             let cryptoName = cryptoConversion.substring(0, hyphenIndex).toLowerCase();
-
-            fiatCurrency.push(cryptoConversion.substring(hyphenIndex + 1, cryptoConversion.length).toUpperCase()); // Extract the FIAT conversion currency. Doesn't work.
-
-            console.log(fiatCurrency[cryptoCurrency]);
+            let currencySymbol = cryptoConversion.substring(hyphenIndex + 1, cryptoConversion.length).toUpperCase();
 
 
-                if(fiatCurrency[cryptoCurrency] == "EUR") {
+                if(currencySymbol == "EUR") {
                     
-                    fiatCurrency[cryptoCurrency] = "€";
+                    currencySymbol = "€";
                 }
                   
-                else if(fiatCurrency[cryptoCurrency] <= "USD") {
-                    fiatCurrency[cryptoCurrency] = "$"
+                else if(currencySymbol >= "USD") {
+                    currencySymbol = "$"
+                }
+
+                else if(currencySymbol == "GBP") {
+                    currencySymbol = "£"
                 }
                 
+                else if(currencySymbol == "BTC") {
+                    currencySymbol = "₿"
+                } 
+                
+                else if(currencySymbol == "ETH") {
+                    currencySymbol = "Ξ"
+                }
 
+                else if(currencySymbol == "TRY") {
+                    currencySymbol = "₺"
+                }
+
+                fiatCurrency.push(currencySymbol); // Extract the FIAT conversion currency.
 
             cryptoNames.push(cryptoName);       // Put the name only into an array.
         });
